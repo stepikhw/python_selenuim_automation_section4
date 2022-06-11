@@ -14,4 +14,4 @@ class BasketPage(BasePage):
 
     def should_have_message_that_basket_is_empty(self):
         assert self.is_element_present(*BasketPageLocators.BASKET_IS_EMPTY), \
-            "There is no BASKET_IS_EMPTY message in the page."
+            "There is no BASKET_IS_EMPTY message on the page."
