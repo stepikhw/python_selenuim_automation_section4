@@ -9,18 +9,21 @@ class ProductPage(BasePage):
     def should_add_product_to_basket_and_show_basket_total(self):
         self.should_be_product_page()
         self.add_product_to_basket()
+        product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
+        product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
+        self.check_that_product_was_added_to_basket(product_name, product_price)
 
     def should_be_product_page(self):
         self.should_have_product_description()
+        self.should_have_price()
 
     def add_product_to_basket(self):
-        self.should_have_price()
         self.should_have_add_to_basket_button()
-        product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
         self.click_on_add_to_basket_button()
         self.solve_quiz_and_get_code()
+
+    def check_that_product_was_added_to_basket(self, product_name, product_price):
         self.should_see_that_product_has_been_added_to_basket(product_name)
-        product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
         self.should_have_correct_basket_total_value(product_price)
 
     def should_have_add_to_basket_button(self):
@@ -50,3 +53,15 @@ class ProductPage(BasePage):
         price_in_the_inner_alert = self.browser.find_element(
             *ProductPageLocators.BASKET_TOTAL_IN_THE_INNER_ALERT).text
         assert product_price == price_in_the_inner_alert, f"[\"{product_price}\"] is shown as [\"{price_in_the_inner_alert}\"] in the inner alert."
+
+    def should_not_have_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.PRODUCT_NAME_IN_THE_INNER_ALERT), \
+            "There is a \"SUCCESSFULLY_ADDED\" inner alert on the page."
+
+    def should_have_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.PRODUCT_NAME_IN_THE_INNER_ALERT), \
+            "There is no \"SUCCESSFULLY_ADDED\" inner alert on the page."
+
+    def should_have_success_message_disappeared(self):
+        assert self.is_element_disappeared(*ProductPageLocators.PRODUCT_NAME_IN_THE_INNER_ALERT), \
+            "\"SUCCESSFULLY_ADDED\" inner alert didn't disappear in time."
