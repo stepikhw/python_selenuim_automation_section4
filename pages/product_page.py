@@ -41,18 +41,22 @@ class ProductPage(BasePage):
         button.click()
 
     def should_see_that_product_has_been_added_to_basket(self, product_name):
-        # Not sure what is expected exactly. Message might be shown not only in English, so we check displaying product name here
-        assert self.is_element_present(*ProductPageLocators.PRODUCT_NAME_IN_THE_INNER_ALERT), "There is no product name in the inner alert."
+        # Not sure what is expected exactly. Message might be shown not only in English, so we check displaying
+        # product name here
+        assert self.is_element_present(
+            *ProductPageLocators.PRODUCT_NAME_IN_THE_INNER_ALERT), "There is no product name in the inner alert."
         product_name_in_the_inner_alert = self.browser.find_element(
             *ProductPageLocators.PRODUCT_NAME_IN_THE_INNER_ALERT).text
-        assert product_name == product_name_in_the_inner_alert, f"[\"{product_name}\"] is shown as [\"{product_name_in_the_inner_alert}\"] in the inner alert."
+        assert product_name == product_name_in_the_inner_alert, f"[\"{product_name}\"] is shown as [\"{product_name_in_the_inner_alert}\"] in the inner alert. "
 
     def should_have_correct_basket_total_value(self, product_price):
-        # Not sure what is expected exactly. Message might be shown not only in English, so we check displaying basket total here
-        assert self.is_element_present(*ProductPageLocators.BASKET_TOTAL_IN_THE_INNER_ALERT), "There is no basket total in the inner alert."
+        # Not sure what is expected exactly. Message might be shown not only in English, so we check displaying
+        # basket total here
+        assert self.is_element_present(
+            *ProductPageLocators.BASKET_TOTAL_IN_THE_INNER_ALERT), "There is no basket total in the inner alert."
         price_in_the_inner_alert = self.browser.find_element(
             *ProductPageLocators.BASKET_TOTAL_IN_THE_INNER_ALERT).text
-        assert product_price == price_in_the_inner_alert, f"[\"{product_price}\"] is shown as [\"{price_in_the_inner_alert}\"] in the inner alert."
+        assert product_price == price_in_the_inner_alert, f"[\"{product_price}\"] is shown as [\"{price_in_the_inner_alert}\"] in the inner alert. "
 
     def should_not_have_success_message(self):
         assert self.is_not_element_present(*ProductPageLocators.PRODUCT_NAME_IN_THE_INNER_ALERT), \
