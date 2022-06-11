@@ -6,6 +6,7 @@ class MainPageLocators:
 
 
 class BasePageLocators:
+    BASKET_LINK = (By.CSS_SELECTOR, "a[class*=\"btn\"][href*=\"/basket/\"]")
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
 
@@ -27,3 +28,8 @@ class ProductPageLocators:
     ADD_TO_BASKET_BUTTON = (By.CSS_SELECTOR, "div[class*=\"product_main\"] button[class*=\"btn-add-to-basket\"]")
     PRODUCT_NAME = (By.CSS_SELECTOR, "div[class*=\"product_main\"] h1")
     PRODUCT_PRICE = (By.CSS_SELECTOR, "div[class*=\"product_main\"] p[class=\"price_color\"]")
+
+class BasketPageLocators:
+    BASKET_IS_EMPTY = (By.CSS_SELECTOR, "div[id=\"content_inner\"] p a")
+    BASKET_SUMMARY = (By.CSS_SELECTOR, "form[class=\"basket_summary\"]")
+    BASKET_ITEM = (By.CSS_SELECTOR, "div.basket_items")
